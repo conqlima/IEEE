@@ -6,21 +6,30 @@ Antidote has a plug-in based architecture. So, it was developed a Castalia plugi
 
 Antidote itself is portable and use ANSI C language to create a standard and clean library. But providing communication between Antidote and others systems, like Castalia, is plug-in dependent. So the dependence of Antidote is just in communication plug-ins.
 
-The proposed plug-in allows Castalia and Antidote talks with each other through \textit{external variables}. Inside Castalia Simulator we can call any function from Antidote Library this way we can retrieve any information from Antidote library. The problem is to transmit the data from Castalia to Antidote Library. To solve this, we first use external variables to make the data exchange between Castalia and Castalia plug-in module. Then, to obtain the data from Castalia plug-in module, Antidote uses pointers to Plug-in Module functions. That's why we need a plug-in to mediate the communication. 
+The proposed plug-in allows Castalia and Antidote talks with each other through \textit{external variables}. Inside Castalia Simulator we can call any function from Antidote Library therefore we can retrieve any information from Antidote library. The problem is to transmit the data from Castalia to Antidote Library. To solve this, we first use external variables to make the data exchange between Castalia and Castalia plug-in module. Then, to obtain the data from Castalia plug-in module, Antidote uses pointers to Plug-in Module functions. That's why we need a plug-in to mediate the communication. 
 
-There are a set of callback functions in Castalia plug-in module that is passed to Antidote during the initialization process of agents. These callback functions are passed to communication module as pointers to functions.
-This way whenever the communication module needs to retrieve or send a message it just trigger the correspondent callback function. The task of these callback functions is to receive and send messages as also initialize and finalize a agent network.
+There are a set of callback functions in Castalia plug-in module that is passed to Antidote during the initialization process of agents. These callback functions are passed to communication module as pointers to functions. This way whenever the communication module needs to retrieve or send a message it just trigger the correspondent callback function. The task of these callback functions is to receive and send messages as also initialize and finalize a agent network.
+
+The Fig.~\ref{fig:CastaliaPlugin} is a representation of the three modules. The arriving messages is copied to an \textit{external variable} in Castalia Simulator Module - the external variable is visible to the both modules Castalia Simulator and Castalia Plugin. So the \textit{pluginGetMessage()} function copy the content of the external variable to a local variable and return this local variable. Since the communication module own a pointer to the \textit{pluginGetMessage()} function, it finally can retrieve the message.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[scale=0.28]{figures/castaliaPlugin.png}}
+\caption{How Antidote Library gets the messages from Castalia Simulator.}
+\label{fig:CastaliaPlugin}
+\end{figure}
 
 \subsection{Changes in communication module}
 
 The Communication module is one of the most important modules in the Antidote. The start, the finalization, transmissions, machine state phases of all nodes are controlled by this module. In a real scenario, each device has your own communication module, running your own copy of the code. So, in one-machine simulation it is a bit different. Only one communication module has to handle with all nodes, since the Antidote Library is installed in the operating system as a dynamic library.
 
-To ensure the proper functioning of communication module, the \textit{node id} is required in each method call, this way we know what node we are working with and apply the action just to that node, never affecting another node. For example, if a node transits from unassociated state to associating machine state, without the proposed modification, this action would affect all nodes even those who should not change their machine state.
+To ensure the proper operation of communication module, the \textit{node id} is required in each method call, this way we know what node we are working with and apply the action just to that node, never affecting another node. For example, if a node transits from unassociated state to associating machine state, without the proposed modification, this action would affect all nodes even those who should not change their machine state.
 
-The Fig.~\ref{fig:communicationModuleCastalia} illustrates the system modification.
+The Fig.~\ref{fig:communicationModuleCastalia} illustrates the system modifications. In every function call from Communication module we insert the \textit{node id} new parameter. This way the communication module always knows the node in question. The arrows in Fig.~\ref{fig:communicationModuleCastalia} represents functions calls.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[scale=0.7]{figures/communicationModuleCastalia.png}}
-\caption{Communication module handling several nodes}
+\caption{Communication module handling several nodes. Each arrow represents a function being called from Communication Module.}
 \label{fig:communicationModuleCastalia}
 \end{figure}
+
+\subsection{Castalia Application}
