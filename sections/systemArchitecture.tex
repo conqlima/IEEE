@@ -34,6 +34,21 @@ The Fig.~\ref{fig:communicationModuleCastalia} illustrates the system modificati
 
 \subsection{Others modifications}
 
+Others modules like Agent, Manager and Encoders were altered too to smooth operation of Antidote in Castalia. Finalization functions of Agent module were transferred to Manager module for the sake of simplicity and the \textit{node id} were add to the parameters of Agent and Manager modules.
 
+In Encoder module some function were created to interpret the data received. To some devices like Electrocardiography the 11073 standard recommends to convert the measurement data to scaled values before send it. It's useful to send absolute values like $-0.060$  which would require many bytes to be sent. When converted, the number $-0.060$ become $388$, a scaled value which require just two byte to be represented.
+
+Within a Manager, the conversion from scaled to absolute values is given by the expression $Y = M \times X + B$ where:
+\begin{align*}
+    Y &= \text{the converted absolute value}\\
+    M &= \frac{(\text{upper absolute value} - \text{lower absolute value})}{(\text{upper scaled value} - \text{lower scaled value})}\\
+    B &= \text{upper absolute value} - (M \times \text{upper scaled value})\\
+    X &= \text{the scaled value}
+\end{align*}
+
+Within an Agent, the conversion from absolute values to scaled values is given by the expression $X = \frac{(R - B)}{M}$ where:
+\begin{align*}
+    R &= \text{actual measured value}
+\end{align*}
 
 \subsection{Castalia Application}
