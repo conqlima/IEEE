@@ -34,9 +34,9 @@ The Fig.~\ref{fig:communicationModuleCastalia} illustrates the system modificati
 
 \subsection{Others modifications}
 
-Others modules like Agent, Manager and Encoders were altered too to smooth operation of Antidote in Castalia. Finalization functions of Agent module were transferred to Manager module for the sake of simplicity and the \textit{node id} were add to the parameters of Agent and Manager modules.
+Others modules like Agent, Manager and Encoders were altered to smooth operation of Antidote. Functions to finalize the Agents module were transferred to Manager module for the sake of simplicity and the \textit{node id} were add as a parameters of Agent and Manager functions.
 
-In Encoder module some function were created to interpret the data received. To some devices like Electrocardiography the 11073 standard recommends to convert the measurement data to scaled values before send it. It's useful to send absolute values like $-0.060$  which would require many bytes to be sent. When converted, the number $-0.060$ become $388$, a scaled value which require just two byte to be represented.
+In Encoder module some function were created to interpret the data received. To some devices like electrocardiography the 11073 standard \cite{b1} recommends to convert the measurement data to scaled values before send it. It's useful to send absolute values like $-0.060$  which would require many bytes to be sent. When converted, the number $-0.060$ become $388$, a scaled value which require just two bytes to send.
 
 Within a Manager, the conversion from scaled to absolute values is given by the expression $Y = M \times X + B$ where:
 \begin{align*}
@@ -51,4 +51,13 @@ Within an Agent, the conversion from absolute values to scaled values is given b
     R &= \text{actual measured value}
 \end{align*}
 
-\subsection{Castalia Application}
+A thermometer that does readings from $-45^\circ$C  to $50^\circ$C with a resolution of $0.5^\circ$C has the following values:
+
+\begin{align*}
+    \text{Lower absolute value} &= -45.0 \\
+    \text{Upper absolute value} &= 50.0 \\
+    \text{Lower scaled value} &= 0 \\
+    \text{Upper scaled value} &= 190
+\end{align*}
+
+Giving $M = \frac{(50.0 - (-45.0))}{(190 – 0)} = 0.5$ and $B = 50.0 - (0.5 \times 190) = -45.0$
