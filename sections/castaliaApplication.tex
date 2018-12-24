@@ -28,7 +28,10 @@ Now the Fig.\ref{fig:confirmedMode} depicts a sequence diagram of the messaging 
 
 \subsection{Proposed modification in confirmed measurement event}
 
-To avoid many right after a non-received ACK we implemented a stop-and-wait retransmission system in the application layer. This save the unnecessary exchange of several control packets. Rather than making a new association we just retransmit the packet $n$ times or until an ACK from manger is received.
+The 11073 standard assumes that there will be a transport layer on real devices. In the Castalia simulator as in other wireless sensor networks we do not have a transport layer, so a stop-and-wait system was implemented at the application layer for retransmission of packets that did not receive a confirmation ACK. This modification avoid many associations right after a non-received ACK.
+
+%To avoid many associations right after a non-received ACK we implemented a stop-and-wait retransmission system in the application layer. 
+This save the unnecessary exchange of several control packets. Rather than making a new association we just retransmit the packet $n$ times or until an ACK from manger is received.
 %The user can define whether to retransmit and how many retransmission attempts wish.
 If an ACK from the manager is lost, the agent will try to retransmit the packet $n$ times as defined by the user. When the manager finally receives the packet, it will retransmit immediately the lost ACK to the agent.
 
