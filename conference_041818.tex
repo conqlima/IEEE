@@ -18,34 +18,34 @@
 % \thanks{Identify applicable funding agency here. If none, delete this.}
 }
 
-\author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
+\author{\IEEEauthorblockN{1\textsuperscript{st} Débora C. Muchaluat Saade}
+\IEEEauthorblockA{\textit{Institute of Computing} \\
+\textit{Federal Fluminense University}\\
+Niterói, Brazil \\
 email address}
 \and
-\IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
+\IEEEauthorblockN{2\textsuperscript{nd} Célio V. N. de Albuquerque}
+\IEEEauthorblockA{\textit{Institute of Computing} \\
+\textit{Federal Fluminense University}\\
+Niterói, Brazil \\
 email address}
 \and
-\IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
+\IEEEauthorblockN{3\textsuperscript{rd} Robson A. Lima}
+\IEEEauthorblockA{\textit{Institute of Computing} \\
+\textit{Federal Fluminense University}\\
+Niterói, Brazil \\
 email address}
 \and
-\IEEEauthorblockN{4\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
+\IEEEauthorblockN{4\textsuperscript{th} Vinicius C. Ferreira}
+\IEEEauthorblockA{\textit{Institute of Computing} \\
+\textit{Federal Fluminense University}\\
+Niterói, Brazil \\
 email address}
 \and
-\IEEEauthorblockN{5\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
+\IEEEauthorblockN{5\textsuperscript{th} Egberto Caballero}
+\IEEEauthorblockA{\textit{Institute of Computing} \\
+\textit{Federal Fluminense University}\\
+Niterói, Brazil \\
 email address}
 \and
 \IEEEauthorblockN{6\textsuperscript{th} Given Name Surname}
@@ -58,9 +58,9 @@ email address}
 \maketitle
 
 \begin{abstract}
-% This document is a model and instructions for \LaTeX.
-% This and the IEEEtran.cls file define the components of your paper [title, text, heads, etc.]. *CRITICAL: Do Not Use Symbols, Special Characters, Footnotes, 
-% or Math in Paper Title or Abstract.
+This paper proposes a free and open-source implementation of Personal Health Devices (PHD) for Castalia Simulator. We adapt the Antidote Library to work on Castalia and implemented five different PHDs to act like a real ISO/IEEE 11073 device in a Wireless Body Area Network (WBAN) simulation. Our application also supports the sender require or not a confirmation from the receiver. The results showed that the confirmed mode did not perform well due to the long period of timeout proposed in the standard. Therefore, we propose a modification to that mode to decrease the overhead of control packets over the network.
+%In contrast, the unconfirmed mode delivered almost all packets because it had no reliability mechanism that require timeouts.
+%This is called confirmed and unconfirmed services type in 11073 standards. We also propose a modification in confirmed serive type.  
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -326,6 +326,8 @@ Martins, A. F., Santos, D. F. S., Perkusich, A., Almeida, H. O. (2014). IEEE 110
 device communication - part 20101: Application profile-base standard. Standard, ISO/IEEE, New York, USA.
 
 \bibitem{b17} Benner, M., Schöpe, L. (2011). Using continua health alliance standards: Implementation and experiences of IEEE 11073. Proceedings - IEEE International Conference on Mobile Data Management, 2, 40–45. \url{https://doi.org/10.1109/MDM.2011.25}
+
+\bibitem{b18} C. Albuquerque, D. Muchaluat-Saade, E. Caballero, F. Seixas, H. Balbi, R. Lima, V. Ferreira, 'Redes Corporais Sem Fio e Suas Aplicações em Saúde', in 37 JAI - Jornadas De Atualização em Informática, Natal: XXXVIII Congresso da Sociedade Brasileira de Computação, 2018, p. 149-198.
 
 \end{thebibliography}
 

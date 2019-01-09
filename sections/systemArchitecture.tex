@@ -1,16 +1,17 @@
 \section{System Architecture}\label{systemarch}
 
-Antidote has a plug-in based architecture. So, was developed a Castalia plugin to support communication between Antidote Stack and Castalia Modules. As the Antidote Library was developed to work with real devices, modifications have been made to the library in reason to work in Castalia Simulator. Communication, encoders, agent and manager are some Antidote's modules changed.
+Antidote has a plug-in based architecture. So, was developed a Castalia plugin to support communication between Antidote Stack and Castalia Modules. As the Antidote is developed to work with real devices, modifications have been made to the library in reason to work in Castalia Simulator. Communication, encoders, agent and manager are some Antidote's modules modified.
 
 \subsection{Castalia Plugin}
 
 Antidote itself is portable and use ANSI C language to create a standard and clean library. But providing communication between Antidote and others systems, like Castalia, is plug-in dependent. So the dependence of Antidote is just in communication plug-ins.
 
-The proposed plug-in allows Castalia and Antidote talks with each other through Castalia plug-in module. Inside Castalia we can call any function from Antidote Library so we can retrieve any information from it. The problem is to transmit the data from Castalia to Antidote Library. To solve this, we first use external variables to make the data exchange between Castalia and Castalia plug-in module. Then, to obtain the data from Castalia plug-in module, Antidote uses pointers to Plug-in Module functions called callback functions. That's why we need a plug-in to mediate the communication. 
+The proposed plug-in allows Castalia and Antidote talks with each other through Castalia plug-in module. Inside Castalia we can call any function from Antidote Library and to retrieve any information from it. But transmit the data from Castalia to Antidote Library is not such simple. To solve this, we first use external variables to make the data exchange between Castalia and Castalia plug-in module. Then, to obtain the data from Castalia plug-in module, Antidote uses pointers to Castalia plug-in functions that we call \textit{callback functions}. That's why we need a plug-in to mediate the communication. 
 
-There are a set of callback functions in Castalia plug-in module that is passed to Antidote during the initialization process of agents. These callback functions are passed to communication module of Antidote as pointers to functions. This way whenever the communication module needs to retrieve or send a message it just trigger the correspondent callback function. The task of these callback functions is to receive and send messages as also initialize and finalize a agent network.
+There are a set of callback functions in Castalia plug-in module that is passed to Antidote during the initialization process of each agent. These callback functions are passed to communication module of Antidote as pointers to functions. This way whenever the communication module needs to retrieve or send a message it just trigger the correspondent callback function. 
+%The task of these callback functions is to receive and send messages as also initialize and finalize a agent network.
 
-The Fig.~\ref{fig:CastaliaPlugin} depicts how Antidotes gets the messages from Castalia. The arriving messages is copied to an external variable in Castalia Simulator Module - the external variable is visible to the both modules Castalia Simulator and Castalia Plugin. Since the communication module in Antidote owns pointers to the Castalia Plug-ins functions, it can retrieve the messages using this callback functions.
+The Fig.~\ref{fig:CastaliaPlugin} depicts how Antidotes gets the messages from Castalia. The arriving messages is copied to an external variable in Castalia Simulator Module - the external variable is visible to the both Castalia Simulator and Castalia Plugin module. Since the communication module in Antidote owns pointers to the Castalia Plug-ins functions, it can retrieve the messages using this callback functions.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[scale=0.35]{figures/castaliaPlugin.png}}
@@ -20,11 +21,12 @@ The Fig.~\ref{fig:CastaliaPlugin} depicts how Antidotes gets the messages from C
 
 \subsection{Changes in communication module}
 
-The Communication module is one of the most important modules in the Antidote. The start, the finalization, transmissions, machine state phases of all nodes are controlled by this module. In a real scenario, each device has your own communication module, running your own copy of the code. So, in one-machine simulation it is a bit different. Only one communication module has to handle with all nodes, since the Antidote Library is installed in the operating system as a dynamic library.
+The Communication module is one of the most important modules in the Antidote Library. The start, the finalization, transmissions, machine state phases of all nodes are controlled by this module. In a real scenario, each device has your own communication module, running your own copy of the code. But in a single-machine simulation it is a bit different. Only one communication module has to handle all nodes, since the Antidote Library is installed in the operating system as a dynamic library.
 
-To ensure the proper operation of communication module, the \textit{node id} is required in each method call, this way we know what node we are working with and apply the action just to that node, never affecting another node. For example, if a node transits from unassociated state to associating machine state, without the proposed modification, this action would affect all nodes even those who should not change their machine state.
+To ensure the proper operation of communication module, the \textit{node id} is required in each function call, this way we know what node we are working with and apply the action just to that node, never affecting another node. For example, if a node transits from unassociated state to associating machine state, without the proposed modification, this action would affect all nodes even those who should not change their machine state.
 
-The Fig.~\ref{fig:communicationModuleCastalia} illustrates the system modifications. In every function in Communication module we insert the \textit{node id} new parameter. This way the communication module always knows the node in question. The arrows in Fig.~\ref{fig:communicationModuleCastalia} represents functions calls.
+The Fig.~\ref{fig:communicationModuleCastalia} illustrates the system modification. In every function in Communication module we insert the \textit{node id} new parameter. This way the communication module always knows the node in question. 
+%The arrows in Fig.~\ref{fig:communicationModuleCastalia} represents functions calls.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[scale=0.31]{figures/communicationModule.png}}
@@ -34,12 +36,12 @@ The Fig.~\ref{fig:communicationModuleCastalia} illustrates the system modificati
 
 \subsection{Others modifications}
 
-Others modules like Agent, Manager and Encoders were altered to smooth operation of Antidote. 
+Others modules like Agent, Manager and Encoders were modified to smooth operation of Antidote functions in Castalia. We can highlight the function we have created in Encoder module to convert the absolute values (the measurements) into scaled non-negative values as recommended by \cite{b1}.
 %Functions to finalize the Agents module were transferred to Manager module for the sake of simplicity and the \textit{node id} were add as a parameters of Agent and Manager functions.
+%In Encoder module a function to interpret the data received was created. 
+It's useful to send absolute values like $-0.060$  which would require many bytes to be sent. For example, the number $-0.060$ converted to a scaled value become $388$, which require just two bytes to be sent.
 
-In Encoder module some function were created to interpret the data received. To some devices like electrocardiography the 11073 standard \cite{b1} recommends to convert the measurement data (absolute values) to scaled values before send it. It's useful to send absolute values like $-0.060$  which would require many bytes to be sent as a byte stream. For example the number $-0.060$ converted to a scaled value become $388$, which require just two bytes to be sent.
-
-Within a Manager, the equation to make the conversion from scaled to absolute values is given by the expression $Y = M \times X + B$ where:
+Within the Manager, the equation to make the conversion from scaled to absolute values is given by the expression $Y = M \times X + B$ where:
 \begin{align*}
     Y &= \text{the converted absolute value}\\
     M &= \frac{(\text{upper absolute value} - \text{lower absolute value})}{(\text{upper scaled value} - \text{lower scaled value})}\\
