@@ -8,63 +8,35 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage[utf8]{inputenc}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Simulation of Personal Health Devices in WBAN networks\\
+\title{Simulation of ISO/IEEE 11073 Personal Health Devices in WBANs\\
 % {\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
 % should not be used}
 % \thanks{Identify applicable funding agency here. If none, delete this.}
 }
 
-\author{\IEEEauthorblockN{1\textsuperscript{st} Débora C. Muchaluat Saade}
-\IEEEauthorblockA{\textit{Institute of Computing} \\
-\textit{Federal Fluminense University}\\
+\author{\IEEEauthorblockN{
+Robson A. Lima, Vinicius C. Ferreira, Egberto Caballero, Célio V. N. Albuquerque, Débora C. Muchaluat Saade\\ }
+\IEEEauthorblockA{\textit{MídiaCom Lab, Institute of Computing} \\
+\textit{Fluminense Federal University}\\
 Niterói, Brazil \\
-email address}
-\and
-\IEEEauthorblockN{2\textsuperscript{nd} Célio V. N. de Albuquerque}
-\IEEEauthorblockA{\textit{Institute of Computing} \\
-\textit{Federal Fluminense University}\\
-Niterói, Brazil \\
-email address}
-\and
-\IEEEauthorblockN{3\textsuperscript{rd} Robson A. Lima}
-\IEEEauthorblockA{\textit{Institute of Computing} \\
-\textit{Federal Fluminense University}\\
-Niterói, Brazil \\
-email address}
-\and
-\IEEEauthorblockN{4\textsuperscript{th} Vinicius C. Ferreira}
-\IEEEauthorblockA{\textit{Institute of Computing} \\
-\textit{Federal Fluminense University}\\
-Niterói, Brazil \\
-email address}
-\and
-\IEEEauthorblockN{5\textsuperscript{th} Egberto Caballero}
-\IEEEauthorblockA{\textit{Institute of Computing} \\
-\textit{Federal Fluminense University}\\
-Niterói, Brazil \\
-email address}
-\and
-\IEEEauthorblockN{6\textsuperscript{th} Given Name Surname}
-\IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
-\textit{name of organization (of Aff.)}\\
-City, Country \\
-email address}
+Email: \{robsonal, vinicius, egbertocr,  debora, celio\} @midiacom.uff.br }
 }
 
 \maketitle
 
 \begin{abstract}
-This paper proposes a free and open-source implementation of Personal Health Devices (PHD) for Castalia Simulator. We adapt the Antidote Library to work on Castalia and implemented five different PHDs to act like a real ISO/IEEE 11073 device in a Wireless Body Area Network (WBAN) simulation. Our application also supports the sender require or not a confirmation from the receiver. The results showed that the confirmed mode did not perform well due to the long period of timeout proposed in the standard. Therefore, we propose a modification to that mode to decrease the overhead of control packets over the network.
+Simulating new protocols for e-health systems is very important, as it allows an initial evaluation before a real implementation is made. On the other hand, network simulators do not offer proper support to represent medical applications or components to facilitate running simulations modeling e-health applications. Aiming at fulfilling this gap, this paper proposes a free and open-source implementation of Personal Health Devices (PHD) for Castalia Simulator. We implemented five different PHDs to act like real ISO/IEEE 11073 devices in Wireless Body Area Network (WBAN) simulations. Our implementation also supports a confirmed communication mode, where the receiver sends an  acknowledgement to the sender every time it receives a packet. Simulation results showed that the confirmed communication mode did not perform well in WBANs due to the long period of timeout proposed in the ISO/IEEE 11073 standard. Therefore, we propose an extension to the standard that decreases the overhead of control packets over the network.
 %In contrast, the unconfirmed mode delivered almost all packets because it had no reliability mechanism that require timeouts.
 %This is called confirmed and unconfirmed services type in 11073 standards. We also propose a modification in confirmed serive type.  
 \end{abstract}
 
 \begin{IEEEkeywords}
-wban, personal health devices, antidote, castalia
+WBAN, personal health devices, ISO/IEEE 11073, Castalia
 \end{IEEEkeywords}
 
 \input{sections/introduction.tex}
@@ -73,6 +45,7 @@ wban, personal health devices, antidote, castalia
 \input{sections/castaliaApplication.tex}
 \input{sections/results.tex}
 \input{sections/conclusion.tex}
+\input{sections/acknwledgmente.tex}
 %\section{Introduction}
 % This document is a model and instructions for \LaTeX.
 % Please observe the conference page limits. 
@@ -283,52 +256,57 @@ wban, personal health devices, antidote, castalia
 % \color{red}
 % IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
 
-\begin{thebibliography}{00}
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,mybib}
+
+%\begin{thebibliography}{00}
 % \bibitem{b1} G. Eason, B. Noble, and I. N. Sneddon, ``On certain integrals of Lipschitz-Hankel type involving products of Bessel functions,'' Phil. Trans. Roy. Soc. London, vol. A247, pp. 529--551, April 1955.
-\bibitem{b1} Health informatics - Personal health device communication, Part 20601: Application profile - Optimized exchange protocol, 2016.
+%\bibitem{b1} Health informatics - Personal health device communication, Part 20601: Application profile - Optimized exchange protocol, 2016.
 
 %\bibitem{b2} J. Clerk Maxwell, A Treatise on Electricity and Magnetism, 3rd ed., vol. 2. Oxford: Clarendon, 1892, pp.68--73.
-\bibitem{b2} Goldberger AL, Amaral LAN, Glass L, Hausdorff JM, Ivanov PCh, Mark RG, Mietus JE, Moody GB, Peng CK, Stanley HE. PhysioBank, PhysioToolkit, and PhysioNet: Components of a New Research Resource for Complex Physiologic Signals. Circulation 101(23):e215-e220 Circulation Electronic Pages; \url{http://circ.ahajournals.org/content/101/23/e215.full}; 2000 (June 13). PMID: 10851218; doi: 10.1161 01.CIR.101.23.e215.
+%\bibitem{b2} Goldberger AL, Amaral LAN, Glass L, Hausdorff JM, Ivanov PCh, Mark RG, Mietus JE, Moody GB, Peng CK, Stanley HE. PhysioBank, PhysioToolkit, and PhysioNet: Components of a New Research Resource for Complex Physiologic Signals. Circulation 101(23):e215-e220 Circulation Electronic Pages; \url{http://circ.ahajournals.org/content/101/23/e215.full}; 2000 (June 13). PMID: 10851218; doi: 10.1161 01.CIR.101.23.e215.
 
 %\bibitem{b3} I. S. Jacobs and C. P. Bean, ``Fine particles, thin films and exchange anisotropy,'' in Magnetism, vol. III, G. T. Rado and H. Suhl, Eds. New York: Academic, 1963, pp. 271--350.
-\bibitem{b3}  Health Informatics - Personal health device communication Part 00103: Overview, 2012.
+%\bibitem{b3}  Health Informatics - Personal health device communication Part 00103: Overview, 2012.
 
 %\bibitem{b4} K. Elissa, ``Title of paper if known,'' unpublished.
-\bibitem{b4} Boulis, A., Tselishchev, Y. (2010). Contention vs. polling: A study in body area networks MAC design. Proceedings of the Fifth International Conference on Body Area Networks, 98–104. \url{https://doi.org/10.1145/2221924.2221944}
+%\bibitem{b4} Boulis, A., Tselishchev, Y. (2010). Contention vs. polling: A study in body area networks MAC design. Proceedings of the Fifth International Conference on Body Area Networks, 98–104. \url{https://doi.org/10.1145/2221924.2221944}
 
 %\bibitem{b5} R. Nicole, ``Title of paper with only first word capitalized,'' J. Name Stand. Abbrev., in press.
-\bibitem{b5} IEEE Std 802.15.6-2012, IEEE Standard for Local and metropolitan area networks - Part 15.6: Wireless Body Area Networks, no. February. 2012.
+%\bibitem{b5} IEEE Std 802.15.6-2012, IEEE Standard for Local and metropolitan area networks - Part 15.6: Wireless Body Area Networks, no. February. 2012.
 
 %\bibitem{b6} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ``Electron spectroscopy studies on magneto-optical media and plastic substrate interface,'' IEEE Transl. J. Magn. Japan, vol. 2, pp. 740--741, August 1987 [Digests 9th Annual Conf. Magnetics Japan, p. 301, 1982].
-\bibitem{b6} Benedetti, D., Petrioli, C., Spenza, D. (2013). GreenCastalia: An Energy-Harvesting-Enabled Framework for the Castalia Simulator. Proceedings of the 1st International Workshop on Energy Neutral Sensing Systems - ENSSys ’13, 1–6. \url{https://doi.org/10.1145/2534208.2534215}
+%\bibitem{b6} Benedetti, D., Petrioli, C., Spenza, D. (2013). GreenCastalia: An Energy-Harvesting-Enabled Framework for the Castalia Simulator. Proceedings of the 1st International Workshop on Energy Neutral Sensing Systems - ENSSys ’13, 1–6. \url{https://doi.org/10.1145/2534208.2534215}
 
 %\bibitem{b7} M. Young, The Technical Writer's Handbook. Mill Valley, CA: University Science, 1989.
-\bibitem{b7}
-Martins, A. F., Santos, D. F. S., Perkusich, A., Almeida, H. O. (2014). IEEE 11073 and connected health: Preparing personal health devices for the Internet. Digest of Technical Papers - IEEE International Conference on Consumer Electronics, 274–275. \url{https://doi.org/10.1109/ICCE.2014.6776001}
+%\bibitem{b7} Martins, A. F., Santos, D. F. S., Perkusich, A., Almeida, H. O. (2014). IEEE 11073 and connected health: Preparing personal health devices for the Internet. Digest of Technical Papers - IEEE International Conference on Consumer Electronics, 274–275. \url{https://doi.org/10.1109/ICCE.2014.6776001}
 
-\bibitem{b8} Gomes, Y. F., Santos, D. F. S., Almeida, H. O., Perkusich, A. (2015). Integrating MQTT and ISO / IEEE 11073 for Health Information Sharing in the Internet of Things. 2015 IEEE International Conference on Consumer Electronics (ICCE), 200–201.
+%\bibitem{b8} Gomes, Y. F., Santos, D. F. S., Almeida, H. O., Perkusich, A. (2015). Integrating MQTT and ISO / IEEE 11073 for Health Information Sharing in the Internet of Things. 2015 IEEE International Conference on Consumer Electronics (ICCE), 200–201.
 
-\bibitem{b9} Santos, D. F. S., Bublitz, F. M., Almeida, H. O., Perkusich, A. (2014). Integrating IEEE 11073 and constrained application protocol for personal health devices. Proceedings of the 29th Annual ACM Symposium on Applied Computing - SAC ’14, (March), 466–467. \url{https://doi.org/10.1145/2554850.2555145}
+%\bibitem{b9} Santos, D. F. S., Bublitz, F. M., Almeida, H. O., Perkusich, A. (2014). Integrating IEEE 11073 and constrained application protocol for personal health devices. Proceedings of the 29th Annual ACM Symposium on Applied Computing - SAC ’14, (March), 466–467. \url{https://doi.org/10.1145/2554850.2555145}
 
-\bibitem{b10} Santos, D. F. S., Almeida, H. O., Perkusich, A. (2015). A personal connected health system for the Internet of Things based on the Constrained Application Protocol. Computers and Electrical Engineering, 44, 122–136. \url{https://doi.org/10.1016/j.compeleceng.2015.02.020}
+%\bibitem{b10} Santos, D. F. S., Almeida, H. O., Perkusich, A. (2015). A personal connected health system for the Internet of Things based on the Constrained Application Protocol. Computers and Electrical Engineering, 44, 122–136. \url{https://doi.org/10.1016/j.compeleceng.2015.02.020}
 
-\bibitem{b11} Clarke, M., De Folter, J., Verma, V., Gokalp, H. (2018). Interoperable End-to-End Remote Patient Monitoring Platform Based on IEEE 11073 PHD and ZigBee Health Care Profile. IEEE Transactions on Biomedical Engineering, 65(5), 1014–1025. \url{https://doi.org/10.1109/TBME.2017.2732501}
+%\bibitem{b11} Clarke, M., De Folter, J., Verma, V., Gokalp, H. (2018). Interoperable End-to-End Remote Patient Monitoring Platform Based on IEEE 11073 PHD and ZigBee Health Care Profile. IEEE Transactions on Biomedical Engineering, 65(5), 1014–1025. \url{https://doi.org/10.1109/TBME.2017.2732501}
 
-\bibitem{b12} International, H. (2019). Health Level Seven International - Homepage | HL7 International. [online] Hl7.org. Available at: \url{http://www.hl7.org/index.cfm} [Accessed 7 Jan. 2019].
+%\bibitem{b12} International, H. (2019). Health Level Seven International - Homepage | HL7 International. [online] Hl7.org. Available at: \url{http://www.hl7.org/index.cfm} [Accessed 7 Jan. 2019].
 
-\bibitem{b13} IHE International. (2019). Integrating the Healthcare Enterprise (IHE) - IHE International. [online] Available at: \url{https://www.ihe.net/} [Accessed 7 Jan. 2019].
+%\bibitem{b13} IHE International. (2019). Integrating the Healthcare Enterprise (IHE) - IHE International. [online] Available at: \url{https://www.ihe.net/} [Accessed 7 Jan. 2019].
 
-\bibitem{b14} Barrón-González, H. G., Martínez-Espronceda, M., Trigo, J. D., Led, S., Serrano, L. (2016). Lessons learned from the implementation of remote control for the interoperability standard ISO/IEEE11073-20601 in a standard weighing scale. Computer Methods and Programs in Biomedicine, 123, 81–93. \url{https://doi.org/10.1016/j.cmpb.2015.09.015}
+%\bibitem{b14} Barrón-González, H. G., Martínez-Espronceda, M., Trigo, J. D., Led, S., Serrano, L. (2016). Lessons learned from the implementation of remote control for the interoperability standard ISO/IEEE11073-20601 in a standard weighing scale. Computer Methods and Programs in Biomedicine, 123, 81–93. \url{https://doi.org/10.1016/j.cmpb.2015.09.015}
 
-\bibitem{b15} Boulis, Athanassios. Castalia: A simulator for Wireless Sensor Networks and Body Area Networks (User's manual). Version 3.3, NICTA. May 2013. [online] Available at: \url{https://github.com/boulis/Castalia} [Accessed 7 Jan. 2019].
+%\bibitem{b15} Boulis, Athanassios. Castalia: A simulator for Wireless Sensor Networks and Body Area Networks (User's manual). Version 3.3, NICTA. May 2013. [online] Available at: \url{https://github.com/boulis/Castalia} [Accessed 7 Jan. 2019].
 
-\bibitem{b16} IEEE Std 11073-20101 (2004). Health informatics-point-of-care medical
-device communication - part 20101: Application profile-base standard. Standard, ISO/IEEE, New York, USA.
+%\bibitem{b16} IEEE Std 11073-20101 (2004). Health informatics-point-of-care medical device communication - part 20101: Application profile-base standard. Standard, ISO/IEEE, New York, USA.
 
-\bibitem{b17} Benner, M., Schöpe, L. (2011). Using continua health alliance standards: Implementation and experiences of IEEE 11073. Proceedings - IEEE International Conference on Mobile Data Management, 2, 40–45. \url{https://doi.org/10.1109/MDM.2011.25}
+%\bibitem{b17} Benner, M., Schöpe, L. (2011). Using continua health alliance standards: Implementation and experiences of IEEE 11073. Proceedings - IEEE International Conference on Mobile Data Management, 2, 40–45. \url{https://doi.org/10.1109/MDM.2011.25}
 
-\bibitem{b18} C. Albuquerque, D. Muchaluat-Saade, E. Caballero, F. Seixas, H. Balbi, R. Lima, V. Ferreira, 'Redes Corporais Sem Fio e Suas Aplicações em Saúde', in 37 JAI - Jornadas De Atualização em Informática, Natal: XXXVIII Congresso da Sociedade Brasileira de Computação, 2018, p. 149-198.
+%\bibitem{b18} C. Albuquerque, D. Muchaluat-Saade, E. Caballero, F. Seixas, H. Balbi, R. Lima, V. Ferreira, 'Redes Corporais Sem Fio e Suas Aplicações em Saúde', in 37 JAI - Jornadas De Atualização em Informática, Natal: XXXVIII Congresso da Sociedade Brasileira de Computação, 2018, p. 149-198.
 
-\end{thebibliography}
+%\bibitem{b19} IEEE 802.15.6-2012 - IEEE Standard for Local and metropolitan area networks - Part 15.6: Wireless Body Area Networks. [online] Available at: \url{https://standards.ieee.org/standard/802_15_6-2012.html} [Accessed 11 Jan. 2019].
+
+%\bibitem{b20} Signove. Antidote: Program Guide, documentation for developers of applications based on Antidote IEEE 11073 library. Version 1.0, 20 abr. 2011.
+
+%\end{thebibliography}
 
 \end{document}
